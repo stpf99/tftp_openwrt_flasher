@@ -300,7 +300,6 @@ def ask_to_continue(step):
         sys.exit(0)
 
 def main():
-    wait = 5
     args = parse_arguments()
     
     ask_to_continue("Download OpenWRT firmware")
