@@ -10,7 +10,7 @@ def parse_arguments():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(description='Flash OpenWRT firmware to router via TFTP')
     parser.add_argument('--version', required=True,
-                      help='OpenWRT version (e.g. 22.03.2)')
+                      help='OpenWRT version (e.g. 23.05.5)')
     parser.add_argument('--arch', default='ramips',
                       help='Target architecture (default: ramips)')
     parser.add_argument('--board', default='mt7620',
