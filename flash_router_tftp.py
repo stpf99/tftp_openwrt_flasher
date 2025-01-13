@@ -154,6 +154,8 @@ def install_tftp_server():
         print("Configuring TFTP socket service...")
         
         # Enable and start the socket
+        subprocess.run(["sudo", "systemctl", "enable", "tftpd.service"], check=True)
+        subprocess.run(["sudo", "systemctl", "start", "tftpd.service"], check=True)
         subprocess.run(["sudo", "systemctl", "enable", "tftpd.socket"], check=True)
         subprocess.run(["sudo", "systemctl", "start", "tftpd.socket"], check=True)
         
@@ -166,16 +168,7 @@ def install_tftp_server():
             time.sleep(2)  # Give the service time to start
             
         print("TFTP socket service enabled and started.")
-        
-        # Verify the socket is listening
-        netstat = subprocess.run(["sudo", "netstat", "-tulpn", "|", "grep", "tftp"],
-                               shell=True, capture_output=True, text=True)
-        if "69" not in netstat.stdout:  # TFTP uses port 69
-            print("Warning: TFTP service may not be properly listening on port 69")
-            print("You may need to manually verify the TFTP service status")
-    except subprocess.CalledProcessError as e:
-        print(f"Error configuring TFTP service: {e}")
-        sys.exit(1)
+            sys.exit(1)
 
 def download_firmware(args):
     """Download firmware from OpenWrt server."""
